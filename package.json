@@ -1,0 +1,26 @@
+{
+  "name": "mulahtask",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "internship",
+    "assessment",
+    "table-display",
+    "web-app"
+  ],
+  "author": "Muhamad Waiz Syazwan Bin Abdul Manap",
+  "license": "ISC",
+  "description": "Web application for displaying CSV data in tables with calculated values - SimpleLoyalty Internship Assessment",
+  "dependencies": {
+    "csv-parser": "^3.2.0",
+    "express": "^5.1.0"
+  }
+}

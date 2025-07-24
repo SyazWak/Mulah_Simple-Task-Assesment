@@ -47,6 +47,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Test route to verify server is working
+app.get('/test', (req, res) => {
+    res.json({ 
+        message: 'Server is working!', 
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || 'development'
+    });
+});
+
 // API route to get table data
 app.get('/api/data', async (req, res) => {
     try {
@@ -93,4 +102,9 @@ app.listen(PORT, () => {
     console.log('Current directory:', __dirname);
     console.log('CSV file path:', path.join(__dirname, 'data', 'Table_Input.csv'));
     console.log('CSV file exists:', fs.existsSync(path.join(__dirname, 'data', 'Table_Input.csv')));
+    console.log('Routes registered:');
+    console.log('- GET /');
+    console.log('- GET /test');
+    console.log('- GET /api/data');
+    console.log('Static files served from:', path.join(__dirname, 'public'));
 });

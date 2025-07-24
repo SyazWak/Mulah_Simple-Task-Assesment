@@ -14,6 +14,14 @@ function readCSVData() {
         const results = [];
         const csvPath = path.join(__dirname, 'data', 'Table_Input.csv');
         
+        console.log('Attempting to read CSV from:', csvPath);
+        console.log('File exists:', fs.existsSync(csvPath));
+        
+        if (!fs.existsSync(csvPath)) {
+            reject(new Error(`CSV file not found at: ${csvPath}`));
+            return;
+        }
+        
         fs.createReadStream(csvPath)
             .pipe(csv())
             .on('data', (data) => {
@@ -24,9 +32,11 @@ function readCSVData() {
                 });
             })
             .on('end', () => {
+                console.log(`Successfully read ${results.length} rows from CSV`);
                 resolve(results);
             })
             .on('error', (error) => {
+                console.error('CSV reading error:', error);
                 reject(error);
             });
     });
@@ -79,4 +89,8 @@ app.get('/api/data', async (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    console.log('Environment:', process.env.NODE_ENV || 'development');
+    console.log('Current directory:', __dirname);
+    console.log('CSV file path:', path.join(__dirname, 'data', 'Table_Input.csv'));
+    console.log('CSV file exists:', fs.existsSync(path.join(__dirname, 'data', 'Table_Input.csv')));
 });
